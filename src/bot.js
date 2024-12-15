@@ -42,9 +42,14 @@ if (!process.env.ADMIN_CHAT_ID){
     process.exit(1);
 }
 
+//#region Commands
 bot.telegram.setMyCommands([
     {
         command: 'start',
+        description: 'Info',
+    },
+    {
+        command: 'setup',
         description: 'ChatID for configuring bot',
     },
     {
@@ -66,12 +71,19 @@ bot.telegram.setMyCommands([
     }
 });
 
-bot.telegram.setMyCommands([], {
+bot.telegram.setMyCommands([
+    {
+        command: 'start',
+        description: 'Info',
+    }
+], {
     scope: {
         type: 'all_private_chats'
     }
 });
+//#endregion
 
+//#region Debug
 bot.use((ctx, next) => {
     console.log('--------------------');
     console.log(`Message from ${ctx.chat.type}`);
@@ -81,8 +93,11 @@ bot.use((ctx, next) => {
     console.log('--------------------');
     return next();
 });
+//#endregion
 
-bot.command('start', async (ctx) => ctx.reply(`${ctx.chat.id}`));
+bot.command('start', async (ctx) => ctx.reply(messages["user.welcome"]));
+
+bot.command('setup', async (ctx) => ctx.reply(`${ctx.chat.id}`));
 
 //#region List command
 bot.command('list', async (ctx) => {
@@ -279,9 +294,6 @@ bot.on('message', async (ctx, next) => {
         });
         
         waitingForReply.add(userId);
-        // console.log('Added to waiting list:', userId);
-        // console.log('Current messageMap:', [...messageMap.entries()]);
-        // console.log('Current waitingForReply:', [...waitingForReply]);
         
         await ctx.reply(messages["user.sent"]);
     } catch (error) {
