@@ -59,7 +59,18 @@ bot.telegram.setMyCommands([
         command: 'unban',
         description: 'Unban user',
     }
-]);
+], {
+    scope: {
+        type: 'chat',
+        chat_id: process.env.ADMIN_CHAT_ID
+    }
+});
+
+bot.telegram.setMyCommands([], {
+    scope: {
+        type: 'all_private_chats'
+    }
+});
 
 bot.use((ctx, next) => {
     console.log('--------------------');
@@ -157,9 +168,9 @@ bot.command('ban', async (ctx) => {
             username = 'Unknown';
         }
 
-        // Validate user
+        // // Validate user
         if (!userToBan) {
-            // await ctx.reply('Error: No valid user specified to ban');
+            await ctx.reply('Error: No valid user specified to ban');
             return;
         }
 
@@ -189,9 +200,11 @@ bot.command('ban', async (ctx) => {
 
         await ctx.reply(banMessage, { parse_mode: 'Markdown' });
         console.log(`User ${userToBan} (${username}) has been banned`);
+        return;
     } catch (error) {
         console.error('Ban command error:', error);
         await ctx.reply(messages["admin.error"]);
+        return;
     }
 });
 //#endregion
@@ -210,9 +223,8 @@ bot.command('unban', async (ctx) => {
 
     const userToUnban = args[1];
 
-    // Check if user exists in banned list
-    if (!bannedUsers[userToUnban]) {
-        // await ctx.reply(`User with ID ${userToUnban} is not in the ban list`);
+    if (!userToUnban) {
+        await ctx.reply('Error: No valid user specified to ban');
         return;
     }
 
@@ -223,9 +235,11 @@ bot.command('unban', async (ctx) => {
         fs.writeFileSync('./src/data/banlist.json', JSON.stringify(bannedUsers, null, 2));
         
         await ctx.reply(messages["admin.unban-success"].replace('{username}', username).replace('{userToUnban}', userToUnban));
+        return;
     } catch (error) {
         console.error('Error while unbanning user:', error);
         await ctx.reply(messages["admin.error"]);
+        return;
     }
 });
 //#endregion

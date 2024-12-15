@@ -1,1 +1,18 @@
-{}
+{
+  "335": {
+    "userChatId": 5678161083,
+    "messageId": 529,
+    "userId": 5678161083,
+    "username": "iwillbedeaduntilnextmorning",
+    "text": "hyi",
+    "timestamp": 1734286216090
+  },
+  "337": {
+    "userChatId": 5678161083,
+    "messageId": 532,
+    "userId": 5678161083,
+    "username": "iwillbedeaduntilnextmorning",
+    "text": "test",
+    "timestamp": 1734286307781
+  }
+}
