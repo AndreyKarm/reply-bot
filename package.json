@@ -1,0 +1,17 @@
+{
+  "name": "reply-bot",
+  "version": "1.0.0",
+  "description": "A Telegram bot for publics. Whenever a user sends a message to a bot, it resends it to the specific chat where admin can reply to a user.",
+  "main": "./src/bot.js",
+  "scripts": {
+    "start": "npm i && nodemon bot.js",
+    "test": "test"
+  },
+  "author": "liotom",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "nodemon": "^3.1.9",
+    "telegraf": "^4.16.3"
+  }
+}
