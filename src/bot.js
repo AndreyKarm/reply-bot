@@ -43,33 +43,35 @@ if (!process.env.ADMIN_CHAT_ID){
 }
 
 //#region Commands
-bot.telegram.setMyCommands([
-    {
-        command: 'start',
-        description: 'Info',
-    },
-    {
-        command: 'setup',
-        description: 'ChatID for configuring bot',
-    },
-    {
-        command: 'list',
-        description: 'List waiting users',
-    },
-    {
-        command: 'ban',
-        description: 'Ban user',
-    },
-    {
-        command: 'unban',
-        description: 'Unban user',
-    }
-], {
-    scope: {
-        type: 'chat',
-        chat_id: process.env.ADMIN_CHAT_ID
-    }
-});
+if (!(process.env.ADMIN_CHAT_ID == "your-chat-id")){
+    bot.telegram.setMyCommands([
+        {
+            command: 'start',
+            description: 'Info',
+        },
+        {
+            command: 'setup',
+            description: 'ChatID for configuring bot',
+        },
+        {
+            command: 'list',
+            description: 'List waiting users',
+        },
+        {
+            command: 'ban',
+            description: 'Ban user',
+        },
+        {
+            command: 'unban',
+            description: 'Unban user',
+        }
+    ], {
+        scope: {
+            type: 'chat',
+            chat_id: process.env.ADMIN_CHAT_ID
+        }
+    });
+}
 
 bot.telegram.setMyCommands([
     {
@@ -107,9 +109,11 @@ bot.command('list', async (ctx) => {
         console.log('Current chat ID:', ctx.chat.id);
         console.log('Target admin ID:', process.env.ADMIN_CHAT_ID);
         
-        if (ctx.chat.id.toString() !== process.env.ADMIN_CHAT_ID) {
-            console.log('Command rejected - not admin group');
-            return;
+        if (!(process.env.ADMIN_CHAT_ID == "your-chat-id")){
+            if (ctx.chat.id.toString() !== process.env.ADMIN_CHAT_ID) {
+                console.log('Command rejected - not admin group');
+                return;
+            }
         }
 
         console.log('MessageMap size:', messageMap.size);
