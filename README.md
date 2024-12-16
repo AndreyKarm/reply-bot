@@ -15,35 +15,34 @@ A Telegram bot that forwards user messages to an admin chat and allows admins to
 
 - Node.js: [Install Node.js](https://nodejs.org/en/download/package-manager/current)
 - npm packages:
-  - telegraf
-  - dotenv
-  - nodemon
+    - telegraf
+    - dotenv
+    - nodemon
 
 ## Setup Instructions
 
 1. Clone or download this repository
 2. Copy `example.env` to `.env`:
-   `shcp example.env .env`
+    `shcp example.env .env`
 3. Create a new Telegram bot:
-   - Message [@BotFather](https://t.me/BotFather) on Telegram
-   - Use `/newbot` command to create a bot
-   - Copy the provided bot token
-   - Paste the token in `.env` file: `BOT_TOKEN="your-token-here"`
+    - Message [@BotFather](https://t.me/BotFather) on Telegram
+    - Use `/newbot` command to create a bot
+    - Copy the provided bot token
+    - Paste the token in `.env` file: `BOT_TOKEN="your-token-here"`
 
 4. Set up admin chat:
-   - Create a new group chat in Telegram
-   - Add your bot to the group
-   - Run `npm run start` to start the bot
-   - In the group chat, use `/setup` command
-   - Copy the displayed Chat ID
-   - Add the Chat ID to `.env`: `ADMIN_CHAT_ID="your-chat-id"`
+    - Create a new group chat in Telegram
+    - Add your bot to the group
+    - Run `npm run start` to start the bot
+    - In the group chat, use `/setup` command
+    - Copy the displayed Chat ID
+    - Add the Chat ID to `.env`: `ADMIN_CHAT_ID="your-chat-id"`
 
 5. Install dependencies and start:
-   ```sh
-   npm install
-   npm run start
-   ```
-
+    ```sh
+    npm install
+    npm run start
+    ```
 ## Available Commands
 
 - `/start` - Display welcome message (users)
@@ -65,4 +64,4 @@ ISC License
 
 ## Author
 
-liotom
+[AndreyKarm](https://github.com/AndreyKarm)
